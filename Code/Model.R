@@ -9,11 +9,9 @@
 #   (1) E-step: the expectation of the log-likelihood is calculated using previous parameter estimates.
 #   (2) M-step: Parameters are re-estimated through the maximisation of the log-likelihood (maximize result from (1)).
 #
-#   See "Maximum likelihood estimation of factor models on data sets with arbitrary pattern of missing data" for details about parameter
-#   derivation (Banbura & Modugno, 2010). This procedure is in much the same spirit.
 #
 # Input:
-#   y:      Series data
+#   y:      Series data/GDP
 #   A:      Transition matrix
 #   C:      Observation matrix
 #   Q:      Covariance for transition equation residuals
@@ -323,3 +321,12 @@ EMstep <- function(y, A, C, Q, R, Z_0, V_0, r, p, R_mat, q, nQ, i_idio, blocks) 
   return(list(C_new = C_new, R_new = R_new, A_new = A_new, Q_new = Q_new, Z_0 = Z_0, V_0 = V_0, loglik = loglik))
   
 }
+
+#RESULTS
+#1(a)# Gdp=0.899783
+#h=120
+#1(b)Ratio=0.3
+
+#1(e)The two factors are inversely proportional
+
+#1(g)Increasing the overall tax income on the inviduals reduces their overall earnings,thus therefore negatively impacting GDP

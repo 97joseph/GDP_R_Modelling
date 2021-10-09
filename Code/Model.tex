@@ -1,0 +1,451 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Model.R},
+  pdfauthor={97jos},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Model.R}
+\author{97jos}
+\date{2021-10-09}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# EMstep    Applies EM algorithm for parameter reestimation}
+\CommentTok{\#}
+\CommentTok{\#   Syntax:}
+\CommentTok{\#     [C\_new, R\_new, A\_new, Q\_new, Z\_0, V\_0, loglik]}
+\CommentTok{\#       \textless{}{-} EMstep(y, A, C, Q, R, Z\_0, V\_0, r, p, R\_mat, q, nQ, i\_idio, blocks)}
+\CommentTok{\#}
+\CommentTok{\# Description:}
+\CommentTok{\#   EMstep reestimates parameters based on the Estimation Maximization (EM) algorithm. This is a two{-}step procedure:}
+\CommentTok{\#   (1) E{-}step: the expectation of the log{-}likelihood is calculated using previous parameter estimates.}
+\CommentTok{\#   (2) M{-}step: Parameters are re{-}estimated through the maximisation of the log{-}likelihood (maximize result from (1)).}
+\CommentTok{\#}
+\CommentTok{\#}
+\CommentTok{\# Input:}
+\CommentTok{\#   y:      Series data/GDP}
+\CommentTok{\#   A:      Transition matrix}
+\CommentTok{\#   C:      Observation matrix}
+\CommentTok{\#   Q:      Covariance for transition equation residuals}
+\CommentTok{\#   R:      Covariance for observation matrix residuals}
+\CommentTok{\#   Z\_0:    Initial values of factors}
+\CommentTok{\#   V\_0:    Initial value of factor covariance matrix}
+\CommentTok{\#   r:      Number of common factors for each block (e.g. vector [1 1 1 1])}
+\CommentTok{\#   p:      Number of lags in transition equation}
+\CommentTok{\#   R\_mat:  Estimation structure for quarterly variables (i.e. "tent")}
+\CommentTok{\#   q:      Constraints on loadings}
+\CommentTok{\#   nQ:     Number of quarterly series}
+\CommentTok{\#   i\_idio: Indices for monthly variables}
+\CommentTok{\#   blocks: Block structure for each series (i.e. for a series, the structure c(1,0,0,1) indicates loadings on the first and fourth factors)}
+\CommentTok{\#}
+\CommentTok{\# Output:}
+\CommentTok{\#   C\_new: Updated observation matrix}
+\CommentTok{\#   R\_new: Updated covariance matrix for residuals of observation matrix}
+\CommentTok{\#   A\_new: Updated transition matrix}
+\CommentTok{\#   Q\_new: Updated covariance matrix for residuals for transition matrix}
+\CommentTok{\#   Z\_0:   Initial value of state}
+\CommentTok{\#   V\_0:   Initial value of covariance matrix}
+\CommentTok{\#   loglik: Log likelihood}
+\CommentTok{\#}
+\CommentTok{\# References:}
+\CommentTok{\#   "Maximum likelihood estimation of factor models on data sets with arbitrary pattern of missing data" by Banbura \& Modugno (2010).}
+\CommentTok{\#   Abbreviated as BM2010}
+
+\NormalTok{EMstep }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(y, A, C, Q, R, Z\_0, V\_0, r, p, R\_mat, q, nQ, i\_idio, blocks) \{}
+  
+  \FunctionTok{library}\NormalTok{(pracma, }\AttributeTok{quietly =}\NormalTok{ T)}
+  \FunctionTok{source}\NormalTok{(}\StringTok{"functions/runKF.R"}\NormalTok{)}
+  
+  \CommentTok{\# Initialize preliminary values {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  
+  \CommentTok{\# Store series/model values}
+\NormalTok{  n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(y)}
+\NormalTok{  TT }\OtherTok{\textless{}{-}} \FunctionTok{ncol}\NormalTok{(y)}
+\NormalTok{  nM }\OtherTok{\textless{}{-}}\NormalTok{ n }\SpecialCharTok{{-}}\NormalTok{ nQ }\CommentTok{\# Number of monthly series}
+\NormalTok{  pC }\OtherTok{\textless{}{-}} \FunctionTok{ncol}\NormalTok{(R\_mat)}
+\NormalTok{  ppC }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(p, pC)}
+\NormalTok{  num\_blocks }\OtherTok{\textless{}{-}} \FunctionTok{ncol}\NormalTok{(blocks) }\CommentTok{\# Number of blocks}
+  
+  \CommentTok{\# 1. Estimation Step {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  \CommentTok{\# Compute the (expected) sufficient statistics for a single Kalman filter sequence}
+  \CommentTok{\# Running the Kalman filter and smoother with current parameters}
+  \CommentTok{\# Note that log{-}liklihood is NOT re{-}estimated after the runKF step:}
+  \CommentTok{\# This effectively gives the previous iteration\textquotesingle{}s log{-}likelihood}
+  \CommentTok{\# For more information on output, see runKF()}
+  
+\NormalTok{  data }\OtherTok{\textless{}{-}} \FunctionTok{runKF}\NormalTok{(y, A, C, Q, R, Z\_0, V\_0)}
+\NormalTok{  Zsmooth }\OtherTok{\textless{}{-}}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{zsmooth}
+\NormalTok{  Vsmooth }\OtherTok{\textless{}{-}}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{Vsmooth}
+\NormalTok{  VVsmooth }\OtherTok{\textless{}{-}}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{VVsmooth}
+\NormalTok{  loglik }\OtherTok{\textless{}{-}}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{loglik}
+  
+  \CommentTok{\# 2. Maximization step (transition equation) {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  \CommentTok{\# See (Banbura \& Modugno, 2010) for details}
+  
+  \CommentTok{\# Initialize output}
+\NormalTok{  A\_new }\OtherTok{\textless{}{-}}\NormalTok{ A}
+\NormalTok{  Q\_new }\OtherTok{\textless{}{-}}\NormalTok{ Q}
+\NormalTok{  V\_0\_new }\OtherTok{\textless{}{-}}\NormalTok{ V\_0}
+  
+  \CommentTok{\# 2A. Update factor parameters individually {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{num\_blocks) \{ }\CommentTok{\# Loop for each block: factors are uncorrelated}
+    
+    \CommentTok{\# Setup indexing}
+\NormalTok{    r\_i }\OtherTok{\textless{}{-}}\NormalTok{ r[i] }\CommentTok{\# r\_i \textless{}{-} 1 if block is loaded}
+\NormalTok{    rp }\OtherTok{\textless{}{-}}\NormalTok{ r\_i }\SpecialCharTok{*}\NormalTok{ p}
+    \ControlFlowTok{if}\NormalTok{ (i }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+\NormalTok{      rp1 }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{    \}}
+    \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{      rp1 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(r[}\DecValTok{1}\SpecialCharTok{:}\NormalTok{(i}\DecValTok{{-}1}\NormalTok{)]) }\SpecialCharTok{*}\NormalTok{ ppC}
+\NormalTok{    \}}
+\NormalTok{    b\_subset }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(rp1 }\SpecialCharTok{+} \DecValTok{1}\NormalTok{, rp1 }\SpecialCharTok{+}\NormalTok{ rp) }\CommentTok{\# Subset blocks: Helps for subsetting Zsmooth, Vsmooth}
+\NormalTok{    t\_start }\OtherTok{\textless{}{-}}\NormalTok{ rp1 }\SpecialCharTok{+} \DecValTok{1} \CommentTok{\# Transition matrix factor idx start}
+\NormalTok{    t\_end }\OtherTok{\textless{}{-}}\NormalTok{ rp1 }\SpecialCharTok{+}\NormalTok{ (r\_i }\SpecialCharTok{*}\NormalTok{ ppC) }\CommentTok{\# Transition matrix factor idx end}
+    
+    \CommentTok{\# Estimate factor portion of Q, A}
+    \CommentTok{\# Note: EZZ, EZZ\_BB, EZZ\_FB are parts of equations 6 and 8 in BM 2010}
+    
+    \CommentTok{\# E[f\_t * f\_t\textquotesingle{} | Omega\_T]}
+\NormalTok{    EZZ }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{t}\NormalTok{(Zsmooth[b\_subset, }\DecValTok{2}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(Zsmooth)]) }\SpecialCharTok{\%*\%}\NormalTok{ Zsmooth[b\_subset, }\DecValTok{2}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(Zsmooth)]) }\SpecialCharTok{+} \FunctionTok{sum}\NormalTok{(Vsmooth[b\_subset, b\_subset, }\DecValTok{2}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{dim}\NormalTok{(Vsmooth)[}\DecValTok{3}\NormalTok{])])}
+    
+    \CommentTok{\# E[f\_\{t{-}1\} * f\_\{t{-}1\}\textquotesingle{} | Omega\_T]}
+\NormalTok{    EZZ\_BB }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{t}\NormalTok{(Zsmooth[b\_subset, }\DecValTok{1}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{ncol}\NormalTok{(Zsmooth)}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)]) }\SpecialCharTok{\%*\%}\NormalTok{ Zsmooth[b\_subset, }\DecValTok{1}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{ncol}\NormalTok{(Zsmooth)}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)]) }\SpecialCharTok{+} \FunctionTok{sum}\NormalTok{(Vsmooth[b\_subset, b\_subset, }\DecValTok{1}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{dim}\NormalTok{(Vsmooth)[}\DecValTok{3}\NormalTok{]}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)])}
+    
+    \CommentTok{\# E[f\_t * f\_\{t{-}1\}\textquotesingle{} | Omega\_T]}
+\NormalTok{    EZZ\_FB }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{t}\NormalTok{(Zsmooth[b\_subset, }\DecValTok{2}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(Zsmooth)]) }\SpecialCharTok{\%*\%}\NormalTok{ Zsmooth[b\_subset, }\DecValTok{1}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{ncol}\NormalTok{(Zsmooth)}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)]) }\SpecialCharTok{+} \FunctionTok{sum}\NormalTok{(VVsmooth[b\_subset, b\_subset,])}
+    
+    \CommentTok{\# Select transition matrix/covariance matrix for block i}
+\NormalTok{    A\_i }\OtherTok{\textless{}{-}}\NormalTok{ A[(t\_start}\SpecialCharTok{:}\NormalTok{t\_end), (t\_start}\SpecialCharTok{:}\NormalTok{t\_end)]}
+\NormalTok{    Q\_i }\OtherTok{\textless{}{-}}\NormalTok{ Q[(t\_start}\SpecialCharTok{:}\NormalTok{t\_end), (t\_start}\SpecialCharTok{:}\NormalTok{t\_end)]}
+    
+    \CommentTok{\# Equation 6: Estimate VAR(p) for factor}
+    \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{length}\NormalTok{(EZZ\_BB) }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+\NormalTok{      A\_i[(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{r\_i),(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{rp)] }\OtherTok{\textless{}{-}}\NormalTok{ EZZ\_FB[(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{r\_i),(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{rp)] }\SpecialCharTok{*} \DecValTok{1} \SpecialCharTok{/}\NormalTok{ (EZZ\_BB[(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{rp),(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{rp)])}
+\NormalTok{    \}}
+    \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{      A\_i[(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{r\_i),(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{rp)] }\OtherTok{\textless{}{-}}\NormalTok{ EZZ\_FB[(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{r\_i),(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{rp)] }\SpecialCharTok{\%*\%} \FunctionTok{inv}\NormalTok{(EZZ\_BB[(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{rp),(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{rp)])}
+\NormalTok{    \}}
+    
+    \CommentTok{\# Equation 8: Covariance matrix of residuals of VAR}
+\NormalTok{    Q\_i[(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{r\_i),(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{r\_i)] }\OtherTok{\textless{}{-}}\NormalTok{ (EZZ[(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{r\_i),(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{r\_i)] }\SpecialCharTok{{-}}\NormalTok{ (A\_i[(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{r\_i),(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{rp)] }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(EZZ\_FB[(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{r\_i),(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{rp)]))) }\SpecialCharTok{/}\NormalTok{ TT}
+    
+    \CommentTok{\# Place updated results in output matrix}
+\NormalTok{    A\_new[(t\_start}\SpecialCharTok{:}\NormalTok{t\_end), (t\_start}\SpecialCharTok{:}\NormalTok{t\_end)] }\OtherTok{\textless{}{-}}\NormalTok{ A\_i}
+\NormalTok{    Q\_new[(t\_start}\SpecialCharTok{:}\NormalTok{t\_end), (t\_start}\SpecialCharTok{:}\NormalTok{t\_end)] }\OtherTok{\textless{}{-}}\NormalTok{ Q\_i}
+\NormalTok{    V\_0\_new[(t\_start}\SpecialCharTok{:}\NormalTok{t\_end), (t\_start}\SpecialCharTok{:}\NormalTok{t\_end)] }\OtherTok{\textless{}{-}}\NormalTok{ Vsmooth[(t\_start}\SpecialCharTok{:}\NormalTok{t\_end), (t\_start}\SpecialCharTok{:}\NormalTok{t\_end), }\DecValTok{1}\NormalTok{]}
+    
+\NormalTok{  \}}
+  
+  \CommentTok{\# 2B. Updating parameters for idiosyncratic component {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  
+\NormalTok{  rp1 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(r) }\SpecialCharTok{*}\NormalTok{ ppC }\CommentTok{\# Col size of factor portion}
+\NormalTok{  niM }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(i\_idio[}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nM]) }\CommentTok{\# Number of monthly values}
+\NormalTok{  t\_start }\OtherTok{\textless{}{-}}\NormalTok{ rp1 }\SpecialCharTok{+} \DecValTok{1} \CommentTok{\# Start of idiosyncratic component index}
+\NormalTok{  i\_subset }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(t\_start, rp1}\SpecialCharTok{+}\NormalTok{niM) }\CommentTok{\# Gives indices for monthly idiosyncratic component values}
+  
+  \CommentTok{\# Below 3 estimate the idiosyncratic component (for eqns 6, 8 BM 2010)}
+  
+  \CommentTok{\# E[f\_t * f\_t\textquotesingle{} | \textbackslash{}Omega\_T]}
+\NormalTok{  EZZ }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(}\FunctionTok{diag}\NormalTok{(Zsmooth[(t\_start}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(Zsmooth)), }\DecValTok{2}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(Zsmooth)] }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(Zsmooth[(t\_start}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(Zsmooth)), }\DecValTok{2}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(Zsmooth)]))) }\SpecialCharTok{+} 
+    \FunctionTok{diag}\NormalTok{(}\FunctionTok{diag}\NormalTok{(}\FunctionTok{rowSums}\NormalTok{(Vsmooth[(t\_start}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(Vsmooth)), (t\_start}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(Vsmooth)), }\DecValTok{2}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{dim}\NormalTok{(Vsmooth)[}\DecValTok{3}\NormalTok{])], }\AttributeTok{dims =} \DecValTok{2}\NormalTok{)))}
+  
+  \CommentTok{\# E[f\_\{t{-}1\} * f\_\{t{-}1\}\textquotesingle{} | \textbackslash{}Omega\_T]}
+\NormalTok{  EZZ\_BB }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(}\FunctionTok{diag}\NormalTok{(Zsmooth[(t\_start}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(Zsmooth)), }\DecValTok{1}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{ncol}\NormalTok{(Zsmooth)}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)] }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(Zsmooth[(t\_start}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(Zsmooth)), }\DecValTok{1}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{ncol}\NormalTok{(Zsmooth)}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)]))) }\SpecialCharTok{+} 
+    \FunctionTok{diag}\NormalTok{(}\FunctionTok{diag}\NormalTok{(}\FunctionTok{rowSums}\NormalTok{(Vsmooth[(t\_start}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(Vsmooth)), (t\_start}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(Vsmooth)), }\DecValTok{1}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{dim}\NormalTok{(Vsmooth)[}\DecValTok{3}\NormalTok{]}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)], }\AttributeTok{dims =} \DecValTok{2}\NormalTok{)))}
+  
+  \CommentTok{\# E[f\_t * f\_\{t{-}1\}\textquotesingle{} | \textbackslash{}Omega\_T]}
+\NormalTok{  EZZ\_FB }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(}\FunctionTok{diag}\NormalTok{(Zsmooth[(t\_start}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(Zsmooth)), }\DecValTok{2}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(Zsmooth)] }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(Zsmooth[(t\_start}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(Zsmooth)), }\DecValTok{1}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{ncol}\NormalTok{(Zsmooth)}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)]))) }\SpecialCharTok{+} 
+    \FunctionTok{diag}\NormalTok{(}\FunctionTok{diag}\NormalTok{(}\FunctionTok{rowSums}\NormalTok{(VVsmooth[(t\_start}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(Vsmooth)), (t\_start}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(Vsmooth)),], }\AttributeTok{dims =} \DecValTok{2}\NormalTok{)))}
+  
+\NormalTok{  A\_i }\OtherTok{\textless{}{-}}\NormalTok{ EZZ\_FB }\SpecialCharTok{\%*\%} \FunctionTok{diag}\NormalTok{(}\DecValTok{1} \SpecialCharTok{/} \FunctionTok{diag}\NormalTok{(EZZ\_BB)) }\CommentTok{\# Equation 6}
+\NormalTok{  Q\_i }\OtherTok{\textless{}{-}}\NormalTok{ (EZZ }\SpecialCharTok{{-}}\NormalTok{ (A\_i }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(EZZ\_FB))) }\SpecialCharTok{/}\NormalTok{ TT }\CommentTok{\# Equation 8}
+  
+  \CommentTok{\# Place updated results in output matrix}
+\NormalTok{  A\_new[i\_subset, i\_subset] }\OtherTok{\textless{}{-}}\NormalTok{ A\_i[(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{niM),(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{niM)]}
+\NormalTok{  Q\_new[i\_subset, i\_subset] }\OtherTok{\textless{}{-}}\NormalTok{ Q\_i[(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{niM),(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{niM)]}
+\NormalTok{  V\_0\_new[i\_subset, i\_subset] }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(}\FunctionTok{diag}\NormalTok{(Vsmooth[i\_subset, i\_subset, }\DecValTok{1}\NormalTok{]))}
+  
+  \CommentTok{\# 3. Maximization step (observation equation) {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  
+  \DocumentationTok{\#\#\# Initialization and setup}
+  
+\NormalTok{  Z\_0 }\OtherTok{\textless{}{-}}\NormalTok{ Zsmooth[,}\DecValTok{1}\NormalTok{] }\CommentTok{\# zeros(size(Zsmooth,1),1)}
+  
+  \CommentTok{\# Set missing data series values to 0}
+\NormalTok{  nanY }\OtherTok{\textless{}{-}} \FunctionTok{is.na}\NormalTok{(y)}
+\NormalTok{  y[nanY] }\OtherTok{\textless{}{-}} \DecValTok{0}
+  
+  \CommentTok{\# Loadings}
+\NormalTok{  C\_new }\OtherTok{\textless{}{-}}\NormalTok{ C}
+  
+  \CommentTok{\# Blocks}
+\NormalTok{  bl }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(blocks) }\CommentTok{\# Gives unique loadings}
+\NormalTok{  n\_bl }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(bl) }\CommentTok{\# Number of unique loadings}
+  
+  \CommentTok{\# Initialize indices: These later help with subsetting}
+\NormalTok{  bl\_idxM }\OtherTok{\textless{}{-}} \ConstantTok{NA} \CommentTok{\# Indicator for monthly factor loadings}
+\NormalTok{  bl\_idxQ }\OtherTok{\textless{}{-}} \ConstantTok{NA} \CommentTok{\# Indicator for quarterly factor loadings}
+\NormalTok{  R\_con }\OtherTok{\textless{}{-}} \ConstantTok{NA} \CommentTok{\# Block diagonal matrix giving monthly{-}quarterly aggreg scheme}
+\NormalTok{  q\_con }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+  
+  \CommentTok{\# Loop through each block}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{num\_blocks) \{}
+    \ControlFlowTok{if}\NormalTok{ (i }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+\NormalTok{      bl\_idxQ }\OtherTok{\textless{}{-}} \FunctionTok{t}\NormalTok{(}\FunctionTok{repmat}\NormalTok{(bl[,i], }\AttributeTok{m =} \DecValTok{1}\NormalTok{, }\AttributeTok{n =}\NormalTok{ r[i]}\SpecialCharTok{*}\NormalTok{ppC))}
+\NormalTok{      bl\_idxM }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{repmat}\NormalTok{(bl[,i], }\AttributeTok{m =} \DecValTok{1}\NormalTok{, }\AttributeTok{n =}\NormalTok{ r[i])), }\FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, n\_bl, r[i]}\SpecialCharTok{*}\NormalTok{(ppC}\DecValTok{{-}1}\NormalTok{)))}
+\NormalTok{      R\_con }\OtherTok{\textless{}{-}} \FunctionTok{kronecker}\NormalTok{(R\_mat, }\FunctionTok{diag}\NormalTok{(r[i]))}
+\NormalTok{      q\_con }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, r[i]}\SpecialCharTok{*}\FunctionTok{nrow}\NormalTok{(R\_mat), }\DecValTok{1}\NormalTok{)}
+\NormalTok{    \}}
+    \ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{      bl\_idxQ }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(bl\_idxQ, }\FunctionTok{t}\NormalTok{(}\FunctionTok{repmat}\NormalTok{(bl[,i], }\AttributeTok{m =} \DecValTok{1}\NormalTok{, }\AttributeTok{n =}\NormalTok{ r[i]}\SpecialCharTok{*}\NormalTok{ppC)))}
+\NormalTok{      bl\_idxM }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(bl\_idxM, }\FunctionTok{t}\NormalTok{(}\FunctionTok{repmat}\NormalTok{(bl[,i], }\AttributeTok{m =} \DecValTok{1}\NormalTok{, }\AttributeTok{n =}\NormalTok{ r[i])), }\FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, n\_bl, r[i]}\SpecialCharTok{*}\NormalTok{(ppC}\DecValTok{{-}1}\NormalTok{)))}
+\NormalTok{      R\_con }\OtherTok{\textless{}{-}} \FunctionTok{blkdiag}\NormalTok{(R\_con, }\FunctionTok{kronecker}\NormalTok{(R\_mat, }\FunctionTok{diag}\NormalTok{(r[i])))}
+\NormalTok{      q\_con }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(q\_con, }\FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, r[i]}\SpecialCharTok{*}\FunctionTok{nrow}\NormalTok{(R\_mat), }\DecValTok{1}\NormalTok{))}
+\NormalTok{    \}}
+\NormalTok{  \}}
+  
+  \CommentTok{\# Indicator for monthly/quarterly blocks in observation matrix}
+\NormalTok{  bl\_idxM }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(}\FunctionTok{as.data.frame}\NormalTok{(bl\_idxM), as.logical)}
+\NormalTok{  bl\_idxQ }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(}\FunctionTok{as.data.frame}\NormalTok{(bl\_idxQ), as.logical)}
+  
+\NormalTok{  i\_idio\_M }\OtherTok{\textless{}{-}}\NormalTok{ i\_idio[}\DecValTok{1}\SpecialCharTok{:}\NormalTok{nM] }\CommentTok{\# Gives 1 for monthly series}
+\NormalTok{  n\_idio\_M }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(}\FunctionTok{which}\NormalTok{(i\_idio\_M }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)) }\CommentTok{\# Number of monthly series}
+\NormalTok{  c\_i\_idio }\OtherTok{\textless{}{-}} \FunctionTok{cumsum}\NormalTok{(i\_idio) }\CommentTok{\# Cumulative number of monthly series}
+  
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n\_bl) \{ }\CommentTok{\# Loop through unique loadings (e.g. [1 0 0 0], [1 1 0 0])}
+    
+\NormalTok{    bl\_i }\OtherTok{\textless{}{-}}\NormalTok{ bl[i,]}
+\NormalTok{    rs }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(r[}\FunctionTok{as.logical}\NormalTok{(bl\_i)]) }\CommentTok{\# Total num of blocks loaded}
+\NormalTok{    idx\_i }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(}\FunctionTok{apply}\NormalTok{(blocks, }\DecValTok{1}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{all.equal}\NormalTok{(x, bl\_i)) }\SpecialCharTok{==} \StringTok{"TRUE"}\NormalTok{) }\CommentTok{\# Indices for bl\_i}
+\NormalTok{    idx\_iM }\OtherTok{\textless{}{-}}\NormalTok{ idx\_i[idx\_i }\SpecialCharTok{\textless{}}\NormalTok{ (nM}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)] }\CommentTok{\# Only monthly}
+\NormalTok{    n\_i }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(idx\_iM) }\CommentTok{\# Number of monthly series}
+    
+    \CommentTok{\# Initialize sums in equation 13 of BGR 2010}
+\NormalTok{    denom }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, n\_i}\SpecialCharTok{*}\NormalTok{rs, n\_i}\SpecialCharTok{*}\NormalTok{rs)}
+\NormalTok{    nom }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, n\_i, rs)}
+    
+    \CommentTok{\# Stores monthly indicies. These are done for input robustness}
+\NormalTok{    i\_idio\_i }\OtherTok{\textless{}{-}}\NormalTok{ i\_idio\_M[idx\_iM]}
+\NormalTok{    i\_idio\_ii }\OtherTok{\textless{}{-}}\NormalTok{ c\_i\_idio[idx\_iM]}
+\NormalTok{    i\_idio\_ii }\OtherTok{\textless{}{-}}\NormalTok{ i\_idio\_ii[i\_idio\_i]}
+    
+    \DocumentationTok{\#\#\# Update monthly variables: Loop through each period}
+    \ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{TT) \{}
+\NormalTok{      Wt }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(}\SpecialCharTok{!}\NormalTok{nanY[idx\_iM, t]) }\CommentTok{\# Gives selection matrix (1 for nonmissing values)}
+      
+      \CommentTok{\# E[f\_t * t\_t\textquotesingle{} | Omega\_T]}
+\NormalTok{      denom }\OtherTok{\textless{}{-}}\NormalTok{ denom }\SpecialCharTok{+} 
+        \FunctionTok{kronecker}\NormalTok{((Zsmooth[}\FunctionTok{which}\NormalTok{(bl\_idxM[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)] }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(Zsmooth[}\FunctionTok{which}\NormalTok{(bl\_idxM[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)])) }\SpecialCharTok{+} 
+\NormalTok{                    Vsmooth[}\FunctionTok{which}\NormalTok{(bl\_idxM[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), }\FunctionTok{which}\NormalTok{(bl\_idxM[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)], Wt)}
+      
+      \CommentTok{\# E[y\_t * f\_t\textquotesingle{} | \textbackslash{}Omega\_T]}
+\NormalTok{      nom }\OtherTok{\textless{}{-}}\NormalTok{ nom }\SpecialCharTok{+} 
+\NormalTok{        (y[idx\_iM, t] }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(Zsmooth[}\FunctionTok{which}\NormalTok{(bl\_idxM[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)])) }\SpecialCharTok{{-}} 
+\NormalTok{        (Wt[,i\_idio\_i] }\SpecialCharTok{\%*\%}\NormalTok{ ((Zsmooth[rp1}\SpecialCharTok{+}\NormalTok{i\_idio\_ii, (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)] }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(Zsmooth[}\FunctionTok{which}\NormalTok{(bl\_idxM[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)])) }\SpecialCharTok{+} 
+\NormalTok{                              Vsmooth[rp1}\SpecialCharTok{+}\NormalTok{i\_idio\_ii, }\FunctionTok{which}\NormalTok{(bl\_idxM[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)]))}
+      
+\NormalTok{    \}}
+    
+\NormalTok{    vec\_C }\OtherTok{\textless{}{-}} \FunctionTok{inv}\NormalTok{(denom) }\SpecialCharTok{\%*\%} \FunctionTok{c}\NormalTok{(nom) }\CommentTok{\# Eqn 13 BGR 2010}
+    
+    \CommentTok{\# Place updated monthly results in output matrix}
+\NormalTok{    C\_new[idx\_iM, }\FunctionTok{which}\NormalTok{(bl\_idxM[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)] }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(vec\_C, n\_i, rs)}
+    
+    \DocumentationTok{\#\#\# Update quarterly variables}
+    
+\NormalTok{    idx\_iQ }\OtherTok{\textless{}{-}}\NormalTok{ idx\_i[idx\_i }\SpecialCharTok{\textgreater{}}\NormalTok{ nM] }\CommentTok{\# Index for quarterly series}
+\NormalTok{    rps }\OtherTok{\textless{}{-}}\NormalTok{ rs }\SpecialCharTok{*}\NormalTok{ ppC}
+    
+    \CommentTok{\# Monthly{-}quarterly aggregation scheme}
+\NormalTok{    R\_con\_i }\OtherTok{\textless{}{-}}\NormalTok{ R\_con[,}\FunctionTok{which}\NormalTok{(bl\_idxQ[i,])]}
+\NormalTok{    q\_con\_i }\OtherTok{\textless{}{-}}\NormalTok{ q\_con}
+    
+\NormalTok{    no\_c }\OtherTok{\textless{}{-}} \SpecialCharTok{!}\FunctionTok{apply}\NormalTok{(R\_con\_i, }\DecValTok{1}\NormalTok{, any)}
+\NormalTok{    R\_con\_i }\OtherTok{\textless{}{-}}\NormalTok{ R\_con\_i[}\SpecialCharTok{!}\NormalTok{no\_c,]}
+\NormalTok{    q\_con\_i }\OtherTok{\textless{}{-}}\NormalTok{ q\_con\_i[}\SpecialCharTok{!}\NormalTok{no\_c,]}
+    
+    \CommentTok{\# Loop through quarterly series in loading. This parallels monthly code}
+    \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \FunctionTok{t}\NormalTok{(idx\_iQ)) \{}
+      \CommentTok{\# Initialization}
+\NormalTok{      denom }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, rps, rps)}
+\NormalTok{      nom }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, rps)}
+      
+\NormalTok{      idx\_jQ }\OtherTok{\textless{}{-}}\NormalTok{ j }\SpecialCharTok{{-}}\NormalTok{ nM }\CommentTok{\# Ordinal position of quarterly variable}
+      \CommentTok{\# Loc of factor structure corresponding to quarterly var residuals}
+\NormalTok{      i\_idio\_jQ }\OtherTok{\textless{}{-}}\NormalTok{ (rp1 }\SpecialCharTok{+}\NormalTok{ n\_idio\_M }\SpecialCharTok{+} \DecValTok{5}\SpecialCharTok{*}\NormalTok{(idx\_jQ}\DecValTok{{-}1}\NormalTok{) }\SpecialCharTok{+} \DecValTok{1}\NormalTok{)}\SpecialCharTok{:}\NormalTok{(rp1 }\SpecialCharTok{+}\NormalTok{ n\_idio\_M }\SpecialCharTok{+} \DecValTok{5}\SpecialCharTok{*}\NormalTok{idx\_jQ)}
+      
+      \CommentTok{\# Place quarterly values in output matrix}
+\NormalTok{      V\_0\_new[i\_idio\_jQ, i\_idio\_jQ] }\OtherTok{\textless{}{-}}\NormalTok{ Vsmooth[i\_idio\_jQ, i\_idio\_jQ, }\DecValTok{1}\NormalTok{]}
+\NormalTok{      A\_new[i\_idio\_jQ[}\DecValTok{1}\NormalTok{], i\_idio\_jQ[}\DecValTok{1}\NormalTok{]] }\OtherTok{\textless{}{-}}\NormalTok{ A\_i[i\_idio\_jQ[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{{-}}\NormalTok{rp1, i\_idio\_jQ[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{{-}}\NormalTok{rp1]}
+\NormalTok{      Q\_new[i\_idio\_jQ[}\DecValTok{1}\NormalTok{], i\_idio\_jQ[}\DecValTok{1}\NormalTok{]] }\OtherTok{\textless{}{-}}\NormalTok{ Q\_i[i\_idio\_jQ[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{{-}}\NormalTok{rp1, i\_idio\_jQ[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{{-}}\NormalTok{rp1]}
+      
+      \ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{TT) \{}
+\NormalTok{        Wt }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(}\SpecialCharTok{!}\NormalTok{nanY[j,t]) }\CommentTok{\# Selection matrix for quarterly values}
+        \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{sum}\NormalTok{(}\FunctionTok{dim}\NormalTok{(Wt)) }\SpecialCharTok{==} \DecValTok{0}\NormalTok{) \{}
+\NormalTok{          Wt }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{        \}}
+        \CommentTok{\# Intermediate steps in BGR equation 13}
+\NormalTok{        denom }\OtherTok{\textless{}{-}}\NormalTok{ denom }\SpecialCharTok{+} 
+          \FunctionTok{kronecker}\NormalTok{(Zsmooth[}\FunctionTok{which}\NormalTok{(bl\_idxQ[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)] }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(Zsmooth[}\FunctionTok{which}\NormalTok{(bl\_idxQ[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)]) }\SpecialCharTok{+} 
+\NormalTok{                      Vsmooth[}\FunctionTok{which}\NormalTok{(bl\_idxQ[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), }\FunctionTok{which}\NormalTok{(bl\_idxQ[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)], Wt)}
+\NormalTok{        nom }\OtherTok{\textless{}{-}}\NormalTok{ nom }\SpecialCharTok{+} 
+\NormalTok{          (y[j, t] }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(Zsmooth[}\FunctionTok{which}\NormalTok{(bl\_idxQ[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)]))}
+\NormalTok{        nom }\OtherTok{\textless{}{-}}\NormalTok{ nom }\SpecialCharTok{{-}} 
+\NormalTok{          (Wt }\SpecialCharTok{\%*\%}\NormalTok{ ((}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{) }\SpecialCharTok{\%*\%}\NormalTok{ Zsmooth[i\_idio\_jQ, (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)] }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(Zsmooth[}\FunctionTok{which}\NormalTok{(bl\_idxQ[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)])) }\SpecialCharTok{+} 
+\NormalTok{                     (}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{) }\SpecialCharTok{\%*\%}\NormalTok{ Vsmooth[i\_idio\_jQ, }\FunctionTok{which}\NormalTok{(bl\_idxQ[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{), (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)])))}
+\NormalTok{      \}}
+      
+\NormalTok{      C\_i }\OtherTok{\textless{}{-}} \FunctionTok{inv}\NormalTok{(denom) }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(nom)}
+      \CommentTok{\# BGR equation 13}
+\NormalTok{      C\_i\_constr }\OtherTok{\textless{}{-}}\NormalTok{ C\_i }\SpecialCharTok{{-}} 
+\NormalTok{        (}\FunctionTok{inv}\NormalTok{(denom) }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(R\_con\_i) }\SpecialCharTok{\%*\%} \FunctionTok{inv}\NormalTok{(R\_con\_i }\SpecialCharTok{\%*\%} \FunctionTok{inv}\NormalTok{(denom) }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(R\_con\_i)) }\SpecialCharTok{\%*\%}\NormalTok{ ((R\_con\_i }\SpecialCharTok{\%*\%}\NormalTok{ C\_i) }\SpecialCharTok{{-}}\NormalTok{ q\_con\_i))}
+      
+      \CommentTok{\# Place updated values in output structure}
+\NormalTok{      C\_new[j, }\FunctionTok{which}\NormalTok{(bl\_idxQ[i,] }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)] }\OtherTok{\textless{}{-}}\NormalTok{ C\_i\_constr}
+\NormalTok{    \}}
+    
+\NormalTok{  \}}
+  
+  
+  \CommentTok{\# 3A. Update covariance residuals for observation equation {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+  
+  \CommentTok{\# Initialize covariance of residuals of observation equation}
+  
+\NormalTok{  R\_new }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{0}\NormalTok{, n, n)}
+  
+  \ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{TT) \{}
+\NormalTok{    Wt }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(}\SpecialCharTok{!}\NormalTok{nanY[,t])}
+\NormalTok{    R\_new }\OtherTok{\textless{}{-}}\NormalTok{ R\_new }\SpecialCharTok{+} 
+\NormalTok{      (y[,t] }\SpecialCharTok{{-}} 
+\NormalTok{         (Wt }\SpecialCharTok{\%*\%}\NormalTok{ C\_new }\SpecialCharTok{\%*\%}\NormalTok{ Zsmooth[, (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)])) }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(y[,t] }\SpecialCharTok{{-}}\NormalTok{ (Wt }\SpecialCharTok{\%*\%}\NormalTok{ C\_new }\SpecialCharTok{\%*\%}\NormalTok{ Zsmooth[, (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)])) }\SpecialCharTok{+} 
+\NormalTok{      (Wt }\SpecialCharTok{\%*\%}\NormalTok{ C\_new }\SpecialCharTok{\%*\%}\NormalTok{ Vsmooth[,, (t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)] }\SpecialCharTok{\%*\%} \FunctionTok{t}\NormalTok{(C\_new) }\SpecialCharTok{\%*\%}\NormalTok{ Wt) }\SpecialCharTok{+} 
+\NormalTok{      ((}\FunctionTok{diag}\NormalTok{(n) }\SpecialCharTok{{-}}\NormalTok{ Wt) }\SpecialCharTok{\%*\%}\NormalTok{ R }\SpecialCharTok{\%*\%}\NormalTok{ (}\FunctionTok{diag}\NormalTok{(n) }\SpecialCharTok{{-}}\NormalTok{ Wt))}
+\NormalTok{  \}}
+  
+\NormalTok{  R\_new }\OtherTok{\textless{}{-}}\NormalTok{ R\_new }\SpecialCharTok{/}\NormalTok{ TT}
+\NormalTok{  RR }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(R\_new) }\CommentTok{\# RR(RR \textless{} 1e{-}2) \textless{}{-} 1e{-}2}
+\NormalTok{  RR[i\_idio\_M] }\OtherTok{\textless{}{-}} \FloatTok{1e{-}04} \CommentTok{\# Ensure non{-}zero measurement error. See Doz, Giannone, Reichlin (2012) for reference.}
+\NormalTok{  RR[(nM}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(RR)] }\OtherTok{\textless{}{-}} \FloatTok{1e{-}04}
+\NormalTok{  R\_new }\OtherTok{\textless{}{-}} \FunctionTok{diag}\NormalTok{(RR) }
+  
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{C\_new =}\NormalTok{ C\_new, }\AttributeTok{R\_new =}\NormalTok{ R\_new, }\AttributeTok{A\_new =}\NormalTok{ A\_new, }\AttributeTok{Q\_new =}\NormalTok{ Q\_new, }\AttributeTok{Z\_0 =}\NormalTok{ Z\_0, }\AttributeTok{V\_0 =}\NormalTok{ V\_0, }\AttributeTok{loglik =}\NormalTok{ loglik))}
+  
+\NormalTok{\}}
+
+\CommentTok{\#RESULTS}
+\CommentTok{\#1(a)\# Gdp=0.899783}
+\CommentTok{\#h=120}
+\CommentTok{\#1(b)Ratio=0.3}
+
+\CommentTok{\#1(e)The two factors are inversely proportional}
+
+\CommentTok{\#1(g)Increasing the overall tax income on the inviduals reduces their overall earnings,thus therefore negatively impacting GDP}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
