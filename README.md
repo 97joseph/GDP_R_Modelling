@@ -1,4 +1,4 @@
-# GDP_R_Modelling
+# GDP MODEL FOR A MATHEMATICAL MODEL
 
 From mathematics to coding models
 
